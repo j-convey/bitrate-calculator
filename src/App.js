@@ -12,7 +12,6 @@ function App() {
     const [adjustedBitrate, setAdjustedBitrate] = useState(null);
     const [showEncodingOptions, setShowEncodingOptions] = useState(false);
 
-
     const handleCalculate = () => {
         const lengthSeconds = hours * 3600 + minutes * 60 + seconds;
         const sizeNum = parseFloat(fileSize);
@@ -26,7 +25,6 @@ function App() {
         setAdjustedBitrate(null);
     };
 
-
     const handleEncodingSelect = (type, encoding) => {
         if (type === 'current') {
             setCurrentEncoding(encoding);
@@ -36,14 +34,13 @@ function App() {
         calculateAdjustedBitrate();
     };
 
-
     const calculateAdjustedBitrate = () => {
         if (!bitrate || !currentEncoding || !targetEncoding) {
             return;
         }
         let adjustmentFactor = 1.0;
 
-        if (currentEncoding === 'h264' && targetEncoding === 'h265') {
+         if (currentEncoding === 'h264' && targetEncoding === 'h265') {
             adjustmentFactor = 0.7;
         } else if (currentEncoding === 'h264' && targetEncoding === 'av1') {
             adjustmentFactor = 0.6;
@@ -61,9 +58,8 @@ function App() {
         setAdjustedBitrate({ kbps: adjustedKbps, Mbps: adjustedMbps });
     };
 
-
     return (
-        <div className="app dark-mode"> {/* Apply dark-mode class directly */}
+        <div className="app dark-mode">
             <header className="app-header">
                 <h1>Bitrate Calculator</h1>
             </header>
@@ -107,6 +103,13 @@ function App() {
                   </div>
                   <button onClick={handleCalculate}>Calculate Bitrate</button>
 
+                  {bitrate && (
+                      <div className="results">
+                          <h2>Results</h2>
+                          <p>Average bitrate: {bitrate.kbps.toFixed(2)} kbps</p>
+                          <p>Average bitrate: {bitrate.Mbps.toFixed(2)} Mbps</p>
+                      </div>
+                  )}
 
                   {bitrate && showEncodingOptions && (
                       <div className="encoding-options">
@@ -153,20 +156,12 @@ function App() {
                                   av1
                               </button>
                           </div>
-                      </div>
-                  )}
-
-                  {bitrate && (
-                      <div className="results">
-                          <h2>Results</h2>
-                          <p>Average bitrate: {bitrate.kbps.toFixed(2)} kbps</p>
-                          <p>Average bitrate: {bitrate.Mbps.toFixed(2)} Mbps</p>
                           {adjustedBitrate && (
-                              <div>
-                                  <h2>Adjusted Bitrate</h2>
-                                  <p>Adjusted Bitrate: {adjustedBitrate.kbps.toFixed(2)} kbps</p>
-                                  <p>Adjusted Bitrate: {adjustedBitrate.Mbps.toFixed(2)} Mbps</p>
-                              </div>
+                            <div className="results adjusted-bitrate">
+                                <h2>Adjusted Bitrate</h2>
+                                <p>Adjusted Bitrate: {adjustedBitrate.kbps.toFixed(2)} kbps</p>
+                                <p>Adjusted Bitrate: {adjustedBitrate.Mbps.toFixed(2)} Mbps</p>
+                            </div>
                           )}
                       </div>
                   )}
