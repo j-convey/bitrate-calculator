@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Bitrate Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web-based bitrate calculator designed to help users estimate and adjust video bitrates based on various encoding and resolution parameters. It allows users to input video duration, file size, and desired output settings to get an idea of optimal bitrates for video encoding.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+*   **Calculate Bitrate:** Input video duration (hours, minutes, seconds) and file size (GB) to get the average bitrate in kbps and Mbps.
+*   **Encoding Options:** Choose the current encoding and the target encoding (h264, h265, av1).
+*   **Resolution Options:** Select the current and target resolutions (SD, HD, UHD).
+*   **Adjusted Bitrate:** Get a recommended and ideal bitrate based on the selected encoding and resolution changes.
+*   **Drag and Drop:** Drag and drop a video file to automatically fill in the duration and file size.
+*   **User-Friendly Interface:** Clean and intuitive design with a dark mode theme.
+*  **Github link**: A link to the source code in the header.
+*  **Tooltip**: Hover over tooltip that describes drag and drop functionality.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+*   **React:** A JavaScript library for building user interfaces.
+*   **CSS:** For styling and layout (using a dark mode theme).
+*   **Font Awesome:** For icons.
+*  **JavaScript**: Used to extract metadata from video files.
+*  **npm**: The node package manager, used to install, uninstall and manage dependancies.
+*  **webpack**: This is a module bundler, and is used by `react-scripts` to bundle the code for the application.
+*  **react-scripts**: These are the main tools used for building react applications in the create-react-app environment.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+To run this project locally, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/j-convey/bitrate-calculator.git
+    ```
+2.  **Navigate to the project directory:**
+    ```bash
+    cd bitrate-calculator
+    ```
+3.  **Install the dependencies:**
+    ```bash
+    npm install
+    ```
+    or
+     ```bash
+     yarn install
+     ```
+4.  **Start the development server:**
+    ```bash
+    npm start
+    ```
+    or
+    ```bash
+    yarn start
+    ```
+    This will start the application and automatically open in your browser. The application will be available at http://localhost:3000.
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1.  **Input video details:**
+    *   Enter the video's duration in hours, minutes, and seconds using the number inputs.
+    *   Enter the video's file size in gigabytes (GB) using the text input.
+     * You can also drag and drop a video file into the input boxes to automatically fill in the time and size.
+2.  **Choose encoding options:**
+    *   Select the current encoding from the options (h264, h265, av1).
+    *   Select the encoding you want to convert to from the options (h264, h265, av1).
+3.  **Choose resolution options:**
+    * Select the current resolution from the options (SD, HD, UHD).
+    * Select the target resolution from the options (SD, HD, UHD).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4.  **Calculate Bitrate:** Click the "Calculate Bitrate" button to calculate the average bitrate for the input file size and duration.
+5. **View Results:** The average bitrate will be displayed in kbps and Mbps.
+6.  **Adjusted Bitrate:** After selecting the encoding options, you will be presented with two bitrates: a recommended bitrate that includes wiggle room to prevent loss of quality, and a more aggressive "ideal bitrate" which may result in quality loss. Note that these values may not result in a consistent file size.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing
 
-### `npm run eject`
+You can test the application by visiting this site:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[https://bitrate-calculator.pages.dev/](https://bitrate-calculator.pages.dev/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This is a live and publicly available version of this application, which is hosted on GitHub pages. Feel free to use this to test how the application works.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Contribution
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Feel free to fork the project and submit pull requests to contribute to this project!
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is open source.
