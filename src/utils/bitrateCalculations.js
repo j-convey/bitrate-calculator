@@ -13,7 +13,10 @@ export const defaultResolution = "HD";
      if(currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h265" && targetEncoding === "h265"){
        idealAdjustmentFactor = 0.25;
       recommendedAdjustmentFactor = 0.3;
-     }else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h264" && targetEncoding === "h265"){
+     } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h265" && targetEncoding === "av1") {
+        idealAdjustmentFactor = 0.6;  
+        recommendedAdjustmentFactor = 0.7; 
+     } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h264" && targetEncoding === "h265"){
         idealAdjustmentFactor = 0.5;
         recommendedAdjustmentFactor = 0.6;
      } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h264" && targetEncoding === "av1"){
@@ -22,7 +25,10 @@ export const defaultResolution = "HD";
       } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "h265"){
         idealAdjustmentFactor = 0.15;
        recommendedAdjustmentFactor = 0.20;
-      }else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "av1"){
+      } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h265" && targetEncoding === "av1") {
+        idealAdjustmentFactor = 0.15;
+        recommendedAdjustmentFactor = 0.2;
+      } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "av1"){
         idealAdjustmentFactor = 0.10;
         recommendedAdjustmentFactor = 0.15
       }else if (currentResolution === "HD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "h265"){
