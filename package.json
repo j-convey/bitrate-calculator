@@ -5,9 +5,13 @@
   "dependencies": {
     "bitrate-calculator": "file:",
     "cra-template": "1.2.0",
+    "html-webpack-plugin": "^5.6.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "^5.0.1",
+    "source-map-loader": "^5.0.0",
+    "webpack": "^5.97.1",
+    "webpack-dev-server": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
