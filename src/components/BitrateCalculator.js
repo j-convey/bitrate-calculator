@@ -4,7 +4,7 @@ import EncodingOptions from './EncodingOptions';
 import Results from './Results';
 import { calculateAdjustedBitrate, extractVideoMetadata, defaultEncoding, defaultResolution } from '../utils/bitrateCalculations';
 
-function BitrateCalculator({setIsDragging}) {
+function BitrateCalculator({ setIsDragging }) {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
@@ -13,10 +13,9 @@ function BitrateCalculator({setIsDragging}) {
     const [currentEncoding, setCurrentEncoding] = useState(defaultEncoding);
     const [targetEncoding, setTargetEncoding] = useState(null);
     const [adjustedBitrate, setAdjustedBitrate] = useState(null);
-      const [currentResolution, setCurrentResolution] = useState(defaultResolution);
+    const [currentResolution, setCurrentResolution] = useState(defaultResolution);
     const [targetResolution, setTargetResolution] = useState(null);
-    const [showEncodingOptions, setShowEncodingOptions] = useState(false);
-       const [idealBitrate, setIdealBitrate] = useState(null);
+        const [idealBitrate, setIdealBitrate] = useState(null);
 
     const handleCalculate = () => {
         const lengthSeconds = hours * 3600 + minutes * 60 + seconds;
@@ -27,9 +26,8 @@ function BitrateCalculator({setIsDragging}) {
         const bitrateMbps = bitrateBps / 1000;
 
         setBitrate({ kbps: bitrateKbps, Mbps: bitrateMbps });
-        setShowEncodingOptions(true);
         setAdjustedBitrate(null);
-          setIdealBitrate(null)
+           setIdealBitrate(null)
     };
 
     const handleEncodingSelect = (type, encoding) => {
@@ -38,7 +36,7 @@ function BitrateCalculator({setIsDragging}) {
         } else if (type === 'target') {
             setTargetEncoding(encoding);
         }
-         calculateAdjustedBitrate(bitrate, currentEncoding, targetEncoding, currentResolution, targetResolution, setAdjustedBitrate, setIdealBitrate);
+        calculateAdjustedBitrate(bitrate, currentEncoding, targetEncoding, currentResolution, targetResolution, setAdjustedBitrate, setIdealBitrate);
     };
 
     const handleResolutionSelect = (type, resolution) => {
@@ -52,50 +50,55 @@ function BitrateCalculator({setIsDragging}) {
 
 
 
-   const handleFileDrop = useCallback(async (event) => {
+    const handleFileDrop = useCallback(async (event) => {
         event.preventDefault();
         event.stopPropagation();
         setIsDragging(false);
 
         const file = event.dataTransfer.files[0];
         if (file && file.type.startsWith('video/')) {
-            const {duration, fileSizeGB, encoding, resolution} = await extractVideoMetadata(file)
+            const { duration, fileSizeGB, encoding, resolution } = await extractVideoMetadata(file)
 
-            setHours(Math.floor(duration / 3600) );
+            setHours(Math.floor(duration / 3600));
             setMinutes(Math.floor((duration % 3600) / 60));
             setSeconds(Math.floor(duration % 60));
             setFileSize(fileSizeGB);
-            if(encoding){
+            if (encoding) {
                 setCurrentEncoding(encoding);
-             }
-            if(resolution){
-                 setCurrentResolution(resolution)
-             }
+            }
+            if (resolution) {
+                setCurrentResolution(resolution)
+            }
 
         }
-     }, [setIsDragging]);
+    }, [setIsDragging]);
 
 
-const handleDragOver = useCallback((event) => {
-    event.preventDefault();
-    setIsDragging(true);
-}, [setIsDragging]);
+    const handleDragOver = useCallback((event) => {
+        event.preventDefault();
+        setIsDragging(true);
+    }, [setIsDragging]);
 
     const handleDragLeave = useCallback((event) => {
-         event.preventDefault();
-         setIsDragging(false)
-     }, [setIsDragging]);
+        event.preventDefault();
+        setIsDragging(false)
+    }, [setIsDragging]);
+
+
 
     return (
-        <div className={`calculator-container`} onDrop={handleFileDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
-              <InputGroup label="Hours" id="hours" type="number" value={hours} placeholder="Drag a video file or enter hours"  onChange={(e) => setHours(parseInt(e.target.value) || 0)}/>
-             <InputGroup label="Minutes" id="minutes" type="number" value={minutes} placeholder="Drag a video file or enter minutes"  onChange={(e) => setMinutes(parseInt(e.target.value) || 0)}/>
-            <InputGroup label="Seconds" id="seconds" type="number" value={seconds} placeholder="Drag a video file or enter seconds"  onChange={(e) => setSeconds(parseInt(e.target.value) || 0)} />
-            <InputGroup label="File Size (GB)" id="fileSize" type="text" value={fileSize}  placeholder="Drag a video file or enter file size"  onChange={(e) => setFileSize(e.target.value)}  />
+        <div
+            className={`calculator-container`}
+            onDrop={handleFileDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+        >
+            <InputGroup label="Hours" id="hours" type="number" value={hours} placeholder="Drag a video file or enter hours" onChange={(e) => setHours(parseInt(e.target.value) || 0)} />
+            <InputGroup label="Minutes" id="minutes" type="number" value={minutes} placeholder="Drag a video file or enter minutes" onChange={(e) => setMinutes(parseInt(e.target.value) || 0)} />
+            <InputGroup label="Seconds" id="seconds" type="number" value={seconds} placeholder="Drag a video file or enter seconds" onChange={(e) => setSeconds(parseInt(e.target.value) || 0)} />
+            <InputGroup label="File Size (GB)" id="fileSize" type="text" value={fileSize} placeholder="Drag a video file or enter file size" onChange={(e) => setFileSize(e.target.value)} />
             <button onClick={handleCalculate}>Calculate Bitrate</button>
-            {bitrate && <Results bitrate={bitrate} adjustedBitrate={adjustedBitrate} idealBitrate={idealBitrate}/>}
-
-             {bitrate && showEncodingOptions && (
+           <Results bitrate={bitrate} />
                  <EncodingOptions
                      currentEncoding={currentEncoding}
                      targetEncoding={targetEncoding}
@@ -104,9 +107,8 @@ const handleDragOver = useCallback((event) => {
                      onEncodingSelect={handleEncodingSelect}
                      onResolutionSelect={handleResolutionSelect}
                  />
-            )}
-
-         </div>
+           <Results adjustedBitrate={adjustedBitrate} idealBitrate={idealBitrate} />
+        </div>
     );
 }
 
