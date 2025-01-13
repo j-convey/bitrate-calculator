@@ -4,7 +4,7 @@ import EncodingOptions from './EncodingOptions';
 import Results from './Results';
 import { calculateAdjustedBitrate, extractVideoMetadata, defaultEncoding, defaultResolution } from '../utils/bitrateCalculations';
 
-function BitrateCalculator() {
+function BitrateCalculator({setIsDragging}) {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
@@ -17,7 +17,6 @@ function BitrateCalculator() {
     const [targetResolution, setTargetResolution] = useState(null);
     const [showEncodingOptions, setShowEncodingOptions] = useState(false);
        const [idealBitrate, setIdealBitrate] = useState(null);
-       const [isDragging, setIsDragging] = useState(false);
 
     const handleCalculate = () => {
         const lengthSeconds = hours * 3600 + minutes * 60 + seconds;
@@ -74,21 +73,21 @@ function BitrateCalculator() {
              }
 
         }
-     }, []);
+     }, [setIsDragging]);
 
 
 const handleDragOver = useCallback((event) => {
     event.preventDefault();
     setIsDragging(true);
-}, []);
+}, [setIsDragging]);
 
     const handleDragLeave = useCallback((event) => {
-    event.preventDefault();
-     setIsDragging(false);
-}, []);
+         event.preventDefault();
+         setIsDragging(false)
+     }, [setIsDragging]);
 
     return (
-        <div className={`calculator-container ${isDragging ? 'drag-over' : ''}`} onDrop={handleFileDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+        <div className={`calculator-container`} onDrop={handleFileDrop} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
               <InputGroup label="Hours" id="hours" type="number" value={hours} placeholder="Drag a video file or enter hours"  onChange={(e) => setHours(parseInt(e.target.value) || 0)}/>
              <InputGroup label="Minutes" id="minutes" type="number" value={minutes} placeholder="Drag a video file or enter minutes"  onChange={(e) => setMinutes(parseInt(e.target.value) || 0)}/>
             <InputGroup label="Seconds" id="seconds" type="number" value={seconds} placeholder="Drag a video file or enter seconds"  onChange={(e) => setSeconds(parseInt(e.target.value) || 0)} />

@@ -5,32 +5,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
 library.add(faFileUpload);
 library.add(faQuestionCircle);
 
 function App() {
-     const [isDragging, setIsDragging] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
-      const handleDragOver = useCallback((event) => {
+    const handleDragOver = useCallback((event) => {
         event.preventDefault();
-          setIsDragging(true);
+        setIsDragging(true);
+    }, []);
+
+   const handleDragLeave = useCallback((event) => {
+         event.preventDefault();
+         setIsDragging(false)
        }, []);
 
 
-      const handleDragLeave = useCallback((event) => {
-        event.preventDefault();
-          setIsDragging(false);
-      }, []);
     return (
-        <div className={`app dark-mode ${isDragging ? 'drag-over' : ''}`} onDragOver={handleDragOver} onDragLeave={handleDragLeave}>
+        <div
+            className={`app dark-mode ${isDragging ? 'drag-over' : ''}`}
+            onDragOver={handleDragOver}
+             onDragLeave={handleDragLeave}
+            >
             <header className="app-header">
                 <h1>Bitrate Calculator</h1>
             </header>
-            <BitrateCalculator />
+            <BitrateCalculator  setIsDragging={setIsDragging} />
              <div className="drag-drop-tooltip">
-                      <FontAwesomeIcon icon={faQuestionCircle}  className="drag-drop-icon" />
-                      <span className="drag-drop-tooltiptext">Drag and drop a video to auto-fill the time and file size.</span>
-                  </div>
+                  <FontAwesomeIcon icon={faQuestionCircle}  className="drag-drop-icon" />
+                  <span className="drag-drop-tooltiptext">Drag and drop a video to auto-fill the time and file size.</span>
+              </div>
         </div>
     );
 }
