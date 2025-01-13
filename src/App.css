@@ -37,6 +37,7 @@
   background-color: #2c2c2c;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 
 .input-group {
@@ -76,6 +77,11 @@
   outline: none;
   box-shadow: 0 0 5px rgba(102, 170, 255, 0.3);
 }
+.input-group input::placeholder{
+  color: #999;
+  font-style: italic;
+}
+
 
 button {
   padding: 14px 28px;
@@ -131,15 +137,13 @@ button:hover {
   color: #eee;
 }
 
-
 .encoding-selection > div {
   margin-bottom: 8px;
 }
 
 .label-and-buttons {
-margin-bottom: 8px;
+  margin-bottom: 8px;
 }
-
 
 .resolution-label {
   margin-left: 0px;
@@ -164,10 +168,47 @@ margin-bottom: 8px;
   background-color: #444;
   color: #eee;
   transition: background-color 0.3s ease;
-     margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .encoding-selection button.selected {
   background-color: #00aaff;
   color: #fff;
+}
+.drag-over {
+  border: 4px dashed #66aaff;
+}
+.drag-drop-tooltip {
+position: absolute;
+bottom: 10px;
+right: 10px;
+display: inline-block;
+cursor: pointer;
+}
+.drag-drop-icon {
+color: #999;
+font-size: 20px;
+}
+
+.drag-drop-tooltip .drag-drop-tooltiptext {
+visibility: hidden;
+width: 200px;
+background-color: #333;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px;
+position: absolute;
+z-index: 1;
+bottom: 125%;
+left: 50%;
+margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.5s;
+
+}
+
+.drag-drop-tooltip:hover .drag-drop-tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
