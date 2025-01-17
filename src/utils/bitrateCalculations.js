@@ -8,39 +8,31 @@ export const defaultResolution = "HD";
       }
     let idealAdjustmentFactor;
     let recommendedAdjustmentFactor;
+    const adjustmentFactors = new Map();
+    adjustmentFactors.set('HD-HD-h264-h265', { ideal: 0.5, recommended: 0.6 });
+    adjustmentFactors.set('HD-HD-h265-av1', { ideal: 0.4, recommended: 0.7 }); 
+    adjustmentFactors.set('HD-HD-h264-av1', { ideal: 0.65, recommended: 0.35 }); 
 
+    adjustmentFactors.set('UHD-UHD-h264-h265', { ideal: 0.5, recommended: 0.6 });
+    adjustmentFactors.set('UHD-UHD-h265-av1', { ideal: 0.4, recommended: 0.7 }); 
+    adjustmentFactors.set('UHD-UHD-h264-av1', { ideal: 0.65, recommended: 0.35 });
 
-     if(currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h265" && targetEncoding === "h265"){
-       idealAdjustmentFactor = 0.25;
-      recommendedAdjustmentFactor = 0.3;
-     } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h265" && targetEncoding === "av1") {
-        idealAdjustmentFactor = 0.6;  
-        recommendedAdjustmentFactor = 0.7; 
-     } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h264" && targetEncoding === "h265"){
-        idealAdjustmentFactor = 0.5;
-        recommendedAdjustmentFactor = 0.6;
-     } else if (currentResolution === "UHD" && targetResolution === "UHD" && currentEncoding === "h264" && targetEncoding === "av1"){
-        idealAdjustmentFactor = 0.4;
-       recommendedAdjustmentFactor = 0.5;
-      } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "h265"){
-        idealAdjustmentFactor = 0.15;
-       recommendedAdjustmentFactor = 0.20;
-      } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h265" && targetEncoding === "av1") {
-        idealAdjustmentFactor = 0.15;
-        recommendedAdjustmentFactor = 0.2;
-      } else if (currentResolution === "UHD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "av1"){
-        idealAdjustmentFactor = 0.10;
-        recommendedAdjustmentFactor = 0.15
-      }else if (currentResolution === "HD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "h265"){
-       idealAdjustmentFactor = 0.5;
-      recommendedAdjustmentFactor = 0.6;
-      }else if (currentResolution === "HD" && targetResolution === "HD" && currentEncoding === "h264" && targetEncoding === "av1"){
-        idealAdjustmentFactor = 0.4;
-        recommendedAdjustmentFactor = 0.5;
-      } else{
+     adjustmentFactors.set('UHD-HD-h265-h265', { ideal: 0.5, recommended: 0.6 });
+     adjustmentFactors.set('UHD-HD-h265-av1', { ideal: 0.45, recommended: 0.55 });
+     adjustmentFactors.set('UHD-HD-h264-h265', { ideal: 0.7, recommended: 0.3 }); 
+     adjustmentFactors.set('UHD-HD-h264-av1', { ideal: 0.6, recommended: 0.4 });
+   
+    const key = `${currentResolution}-${targetResolution}-${currentEncoding}-${targetEncoding}`;
+
+    const factors = adjustmentFactors.get(key);
+    
+    if (factors) {
+      idealAdjustmentFactor = factors.ideal;
+      recommendedAdjustmentFactor = factors.recommended;
+    } else {
       idealAdjustmentFactor = 1;
-       recommendedAdjustmentFactor = 1;
-      }
+      recommendedAdjustmentFactor = 1;
+    }
 
     const adjustedKbps = bitrate.kbps * recommendedAdjustmentFactor;
       const adjustedMbps = bitrate.Mbps * recommendedAdjustmentFactor;
