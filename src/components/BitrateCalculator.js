@@ -10,10 +10,10 @@ function BitrateCalculator({ setIsDragging }) {
     const [seconds, setSeconds] = useState(0);
     const [fileSize, setFileSize] = useState('');
     const [bitrate, setBitrate] = useState(null);
-    const [currentEncoding, setCurrentEncoding] = useState(defaultEncoding);
+    const [currentEncoding, setCurrentEncoding] = useState(null);
     const [targetEncoding, setTargetEncoding] = useState(null);
     const [adjustedBitrate, setAdjustedBitrate] = useState(null);
-    const [currentResolution, setCurrentResolution] = useState(defaultResolution);
+    const [currentResolution, setCurrentResolution] = useState(null);
     const [targetResolution, setTargetResolution] = useState(null);
         const [idealBitrate, setIdealBitrate] = useState(null);
 

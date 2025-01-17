@@ -200,7 +200,6 @@ button:hover {
 
 .drag-drop-tooltip .drag-drop-tooltiptext {
   visibility: hidden;
-  width: 200px;
   background-color: #333;
   color: #fff;
   text-align: center;
